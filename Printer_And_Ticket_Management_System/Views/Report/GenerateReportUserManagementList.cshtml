@@ -1,0 +1,30 @@
+﻿
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User Deatails Report List</h2>
+
+@model Printer_And_Ticket_Management_System.Models.CommonReport
+
+@using (Html.BeginForm("GenerateReportUserManagementList", "Report", FormMethod.Post))
+{
+
+    <br>
+    <div>
+        <label for="fromDate" class="control-label col-md-2">From :</label>
+        @Html.TextBoxFor(m => m.fromDate, "{yyyy-MM-dd}", new { type = "date", @class = "form-control", required = "required" })
+    </div>
+    <div class="padding-top-10">  </div>
+    <div class="padding-top-10">  </div>
+
+    <div>
+        <label for="toDate" class="control-label col-md-2">To :</label>
+        @Html.TextBoxFor(m => m.toDate, "{yyyy-MM-dd}", new { type = "date", @class = "form-control", required = "required" })
+
+    </div>
+
+    <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+}

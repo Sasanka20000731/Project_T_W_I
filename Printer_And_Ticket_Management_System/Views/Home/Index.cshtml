@@ -1,0 +1,245 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<style >
+    .border-top-style {
+        border-top: 5px solid #334148;
+    }
+    .min-height-235px{
+        min-height:235px;
+    }
+</style>
+<div class="row pb-10">
+    <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+        <div class="card-box height-100-p widget-style3">
+            <div class="d-flex flex-wrap">
+                <div class="widget-data">
+                    <div class="weight-700 font-24 text-dark">
+                        <p>  @ViewBag.TicketCount</p>
+                    </div>
+                    <div class="font-14 text-secondary weight-500">Total Tickets</div>
+                </div>
+                <div class="widget-icon">
+                    <div class="icon" data-color="#00eccf"><i class="icon-copy dw dw-ticket-1"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+        <div class="card-box height-100-p widget-style3">
+            <div class="d-flex flex-wrap">
+                <div class="widget-data">
+                    <div class="weight-700 font-24 text-dark"><p>  @ViewBag.BranchCount</p></div>
+                    <div class="font-14 text-secondary weight-500">Total Branches</div>
+                </div>
+                <div class="widget-icon">
+                    <div class="icon" data-color="#ff5b5b"><span class="icon-copy fa fa-home"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+        <div class="card-box height-100-p widget-style3">
+            <div class="d-flex flex-wrap">
+                <div class="widget-data">
+                    <div class="weight-700 font-24 text-dark">
+                        <p> @ViewBag.PrinterCount </p>
+                    </div>
+                    <div class="font-14 text-secondary weight-500">Total Printer </div>
+                </div>
+                <div class="widget-icon">
+                    <div class="icon" data-color="#ecbe00"><i class="icon-copy fa fa-print" aria-hidden="true"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
+        <div class="card-box height-100-p widget-style3">
+            <div class="d-flex flex-wrap">
+                <div class="widget-data">
+                    <div class="weight-700 font-24 text-dark">
+                        <p> @ViewBag.UserCount </p>
+                    </div>
+                    <div class="font-14 text-secondary weight-500">User Account</div>
+                </div>
+                <div class="widget-icon">
+                    <div class="icon" data-color="#09cc06"><i class="icon-copy fa fa-user" aria-hidden="true"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row pb-10">
+
+    <div class="col-lg-5 col-sm-12 mb-20">
+        <div class="card-box min-height-200px pd-20 mb-20 border-top-style" data-bgcolor="##F0FFFF">
+            <div class="d-flex justify-content-between pb-20 text-black-100">
+                <div class="text-black-100">
+                    <div class="font-14 text-right">
+                        <div class="font-12">Branches wise Ticket count  </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col flex-nowrap d-flex justify-content-between align-items-end">
+                <div>
+                    <canvas id="ticket-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7 col-sm-12 mb-40">
+
+
+        <div class="row clearfix progress-box min-height-200px">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="card-box pd-30 height-100-p border-top-style">
+                    <div class="progress-box text-center">
+                        <h3> @ViewBag.DisTickets</h3>
+                      <h5 class="text-blue padding-top-10 h5">Pending Tickets</h5>
+                        <span class="d-block">
+                             <i class="fa fa-2x fa-folder-o text-blue"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 min-height-235px">
+                <div class="card-box pd-30 height-100-p border-top-style" >
+                    <div class="progress-box text-center">
+                        <h3> @ViewBag.DisOpened</h3>
+                        <h5 class="text-light-green padding-top-10 h5">
+                            Opened Tikcets
+                        </h5>
+                        <span class="d-block">
+                             <i class="fa fa-2x text-light-green fa-folder-open-o"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+
+
+
+        @*<div class="card-box height-50-p widget-style3">
+            <div class="d-flex flex-wrap">
+                <div class="widget-data">
+                    <div class="weight-700 font-24 text-dark">
+                        <p> @ViewBag.DisTickets</p>
+                    </div>
+                    <div class="font-14 text-secondary weight-500">Pending Tickets </div>
+                </div>
+                <div class="widget-icon">
+                    <div class="icon" data-color="#ff5b5b"><span class="icon-copy ti-ticket"></span></div>
+                </div>
+            </div>
+        </div>
+        <div class="row pb-1"></div>
+
+
+        <div class="card-box height-50-p widget-style3">
+            <div class="d-flex flex-wrap">
+                <div class="widget-data">
+                    <div class="weight-700 font-24 text-dark">
+                        <p> @ViewBag.DisOpened </p>
+                    </div>
+                    <div class="font-14 text-secondary weight-500">Opened Tikcets</div>
+                </div>
+                <div class="widget-icon">
+                    <div class="icon" data-color="#ff5b5b"><span class="icon-copy ti-ticket"></span></div>
+                </div>
+            </div>
+        </div>*@
+
+
+
+    </div>
+
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Get the data from ViewBag
+    var branchIDs = @Html.Raw(Json.Encode(ViewBag.ChartBranchIDs));
+    var counts = @Html.Raw(Json.Encode(ViewBag.ChartCounts));
+
+    // Create the chart using Chart.js
+    var ctx = document.getElementById('ticket-chart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: branchIDs,
+            datasets: [{
+                label: 'Ticket Count',
+                data: counts,
+                backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.6)'],
+                borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    precision: 0,
+                    title: {
+                        display: true,
+                        text: 'Tickets'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Branch ID'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+</script>
+<script >
+    // Get the data from ViewBag
+    var branchIDs = @Html.Raw(Json.Encode(ViewBag.ChartBranchIDs));
+    var counts = @Html.Raw(Json.Encode(ViewBag.ChartCounts));
+
+    // Create the chart using Chart.js
+    var ctx = document.getElementById('ticket-chart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: branchIDs,
+            datasets: [{
+                label: 'Ticket Count',
+                data: counts,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    precision: 0
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+</script>
+
+

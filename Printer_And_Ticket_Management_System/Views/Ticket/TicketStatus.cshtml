@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Printer_And_Ticket_Management_System.Data.Table_Ticket>
+
+@{
+    ViewBag.Title = "TicketStatus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ticket Status</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TicketID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TicketDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpenedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpenedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClosedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClosedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.States)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.urgency)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OpenedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClosedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClosedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.States)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.urgency)
+            </td>
+
+
+            <td id="OpenCloseTicketID">
+                @if (ViewBag.UserRole != "3" || ViewBag.UserRole != "2")
+                {
+                    @Html.ActionLink("Open Ticket", "openTicket", new { otid = item.TicketID }, new { @class = "open-ticket-link" })
+                    @Html.Raw(" | ")
+                    @Html.ActionLink("Close Ticket", "closeTicket", new { ctid = item.TicketID }, new { @class = "close-ticket-link" })
+                }
+            </td>
+
+        </tr>
+     }
+
+</table>
+
+<script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            debugger
+         var a = '1';
+         var m = '3';
+         var b = '2';
+         var t = '4';
+         var uLevel = '@ViewBag.UserRole';
+
+         //if ( uLevel  == m) {
+         //    $('#OpenCloseTicketID').hide();
+         //   }
+
+            $(document).ready(function () {
+                if (uLevel == m) {
+                    $('.open-ticket-link, .close-ticket-link').hide();
+                }
+            });
+
+            $(document).ready(function () {
+                if (uLevel == b) {
+                    $('.open-ticket-link, .close-ticket-link').hide();
+                }
+            });
+
+
+        });
+
+</script>

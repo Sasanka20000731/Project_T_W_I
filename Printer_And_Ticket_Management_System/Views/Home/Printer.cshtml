@@ -1,0 +1,110 @@
+﻿@model IEnumerable<Printer_And_Ticket_Management_System.Data.Table_Printer>
+@{
+
+    Layout = "../Shared/_Layout.cshtml";
+
+}
+@{
+    ViewBag.Title = "Printer";
+}
+
+<h2>Printer</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PrinterID)
+        </th>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.PrinterCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BrandName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PurchasedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VendorName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VendorContact)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WarrantyPeriod)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrinterID)
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.PrinterCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BrandName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchasedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VendorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VendorContact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WarrantyPeriod)
+            </td>
+       
+
+            <td id="PrinterDelete">
+
+                @if (ViewBag.UserRole != "3" || ViewBag.UserRole != "2")
+                {
+                    @Html.ActionLink("Edit Printer", "EditPrinter", new { pid = item.PrinterID }, new { @class = "Edit-Printer-link" })
+                    @Html.Raw(" | ")
+                    @Html.ActionLink("Delete Printer", "DeletePrinter", new { pid_d = item.PrinterID }, new { @class = "Delete-Printer-link" })
+                }
+            </td>
+
+
+
+
+        </tr>
+    }
+
+</table>
+
+
+
+<script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            debugger
+         var a = '1';
+         var m = '3';
+         var b = '2';
+         var t = '4';
+         var uLevel = '@ViewBag.UserRole';
+            $(document).ready(function () {
+                if (uLevel == m) {
+                    $('.Edit-Printer-link, .Delete-Printer-link').hide();
+                }
+            });
+            $(document).ready(function () {
+                if (uLevel == b) {
+                    $('.Edit-Printer-link, .Delete-Printer-link').hide();
+                }
+            });
+        });
+
+</script>

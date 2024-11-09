@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1cf65f7746254399b225eb7fbe285954" Name="Diagram1" ZoomLevel="75">
+        <EntityTypeShape EntityType="ProjectDBModel.Table_AuditTrail" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.Table_Branch" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.Table_Printer" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.Table_PrinterAllocation" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.Table_Ticket" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.Table_UserDetail" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ProjectDBModel.FK_Table_PrinterAllocation_Table_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectDBModel.FK_Table_Ticket_Table_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectDBModel.FK_Table_PrinterAllocation_Table_Printer" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectDBModel.FK_Table_Ticket_Table_Printer" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectDBModel.FK_Table_Ticket_Table_UserDetail" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,83 @@
+﻿@model Printer_And_Ticket_Management_System.Models.Allocation
+
+@{
+ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Allocation</h2>
+
+@using (Html.BeginForm("UpdateAllocation", "Home"))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Table_PrinterAllocation</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*@Html.HiddenFor(model => model.AllocationID)*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AllocationID, "AllocationID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AllocationID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+                @Html.ValidationMessageFor(model => model.AllocationID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PrinterID, "PrinterID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+               @* @Html.DropDownList("PrinterID", new SelectList(Model.PrinterIDs), "Select Printer", new { @class = "form-control", @required = "required" })*@
+                @Html.DropDownList("printerID", new SelectList(Model.PrinterIDs), "Select printer", new { @class = "form-control", @required = "required" })
+                @*@Html.TextBoxFor(model => model.PrinterID, new { @class = "form-control", type = "number", min = "1", step = "1", required = "required" })*@
+
+                @Html.ValidationMessageFor(model => model.PrinterID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BranchID, "BranchID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("BranchID", new SelectList(Model.BranchList), "Select Branch", new { @class = "form-control", @required = "required" })
+               @* @Html.TextBoxFor(model => model.BranchID, new { @class = "form-control", type = "number", min = "1", step = "1", required = "required" })*@
+                @Html.ValidationMessageFor(model => model.BranchID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AllocatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AllocatedDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.AllocatedDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Remark, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Remark, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Reason, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Reason, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.Reason, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

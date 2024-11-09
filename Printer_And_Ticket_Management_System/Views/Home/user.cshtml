@@ -1,0 +1,122 @@
+﻿@model IEnumerable<Printer_And_Ticket_Management_System.Data.Table_UserDetail>
+@{
+
+    Layout = "../Shared/_Layout.cshtml";
+
+}
+
+
+<h2>User Details</h2>
+
+<p>
+    @if (ViewBag.UserRole == "1" )
+    {
+        @Html.ActionLink("Create New User", "AddUser", new { @class = "Add-User-link" })
+    }
+    </p>
+<table class="table">
+    <tr>
+
+        <td>
+
+            @Html.DisplayNameFor(model => model.UserID)
+        </td>
+        <td>
+
+            @Html.DisplayNameFor(model => model.EmpID)
+        </td>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BranchID)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+
+    <td>
+
+        @Html.DisplayFor(modelItem => item.UserID)
+    </td>
+    <td>
+
+        @Html.DisplayFor(modelItem => item.EmpID)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LastName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ContactNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DateOfBirth)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Status)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BranchID)
+    </td>
+    
+    <td id="UserDeleteEditID">
+
+        @if (ViewBag.UserRole != "3" || ViewBag.UserRole != "2")
+        {
+            @Html.ActionLink("Edit", "EditUser", new { uid = item.UserID }, new { @class = "Edit-User-link" })
+            @Html.Raw(" | ")
+            @Html.ActionLink("Deactivate", "DeactivateUser", new { uid = item.UserID }, new { @class = "Delete-User-link" })
+            @Html.Raw(" | ")
+            @Html.ActionLink("Activate", "ActivateUser", new { uid = item.UserID }, new { @class = "Activate-User-link" })
+        }
+    </td>
+
+         </tr>
+        }
+
+</table>
+
+
+
+<script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            debugger
+         var a = '1';
+         var m = '3';
+         var b = '2';
+         var t = '4';
+         var uLevel = '@ViewBag.UserRole';
+            $(document).ready(function () {
+                if (uLevel == m) {
+                    $('.Edit-User-link, .Delete-User-link, .Add-User-link, .Activate-User-link').hide();
+
+                }
+            });
+            $(document).ready(function () {
+                if (uLevel == b) {
+                    $('.Edit-User-link, .Delete-User-link, .Add-User-link , .Activate-User-link').hide();
+                }
+            });
+        });
+
+</script>

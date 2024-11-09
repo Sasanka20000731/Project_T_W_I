@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Printer_And_Ticket_Management_System.Data.Table_PrinterAllocation>
+@{
+
+    Layout = "../Shared/_Layout.cshtml";
+
+}
+@{
+    ViewBag.Title = "ViewAllocations";
+}
+
+<h2>Allocations Details</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AllocationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrinterID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BranchID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AllocatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remark)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllocationID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrinterID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BranchID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllocatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remark)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditAllocation", new {  Aid = item.AllocationID }) |
+                @Html.ActionLink("Delete", "DeleteAllocation", new { Aid = item.AllocationID })
+            </td>
+        </tr>
+    }
+
+</table>

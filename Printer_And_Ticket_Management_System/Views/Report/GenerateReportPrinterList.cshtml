@@ -1,0 +1,32 @@
+﻿
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Printer List Report</h2>
+
+@model Printer_And_Ticket_Management_System.Models.CommonReport
+
+@using (Html.BeginForm("GenerateReportPrinterList", "Report", FormMethod.Post))
+{
+   
+    <br>
+    <div>
+        @Html.LabelFor(m => m.fromDate)
+        @*    @Html.TextBoxFor(m => m.fromDate, "{yyyy-MM-dd}", new { type = "datetime-local", @class = "form-control" })*@
+        @Html.TextBoxFor(m => m.fromDate, "{yyyy-MM-dd}", new { type = "date", @class = "form-control" })
+
+    </div>
+
+
+    <div>
+        @Html.LabelFor(m => m.toDate)
+        @*@Html.TextBoxFor(m => m.toDate, "{yyyy-MM-dd}", new { type = "datetime-local", @class = "form-control" })*@
+        @Html.TextBoxFor(m => m.toDate, "{yyyy-MM-dd}", new { type = "date", @class = "form-control" })
+
+    </div>
+
+    <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+}

@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Printer_And_Ticket_Management_System.Data.Table_Ticket>
+
+
+
+<h2>Tickets Details</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TicketID)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.TicketDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.urgency)
+            (Days)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BranchID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Table_Printer.PrinterCode)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.urgency)
+              
+            <td>
+                @Html.DisplayFor(modelItem => item.BranchID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Table_Printer.PrinterCode)
+            </td>
+            <td id="TicketDeletID">
+
+                @if (ViewBag.UserRole != "3" || ViewBag.UserRole != "2")
+                {
+                    @Html.ActionLink("Edit Ticket", "editTicket", new { Tid = item.TicketID }, new { @class = "Edit-ticket-link" })
+                    @Html.Raw(" | ")
+                    @Html.ActionLink("Delete Ticket", "DeleteTicket", new { Tid_d = item.TicketID }, new { @class = "Delete-ticket-link" })
+                }
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+
+<script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            debugger
+         var a = '1';
+         var m = '3';
+         var b = '2';
+         var t = '4';
+         var uLevel = '@ViewBag.UserRole';
+            $(document).ready(function () {
+                if (uLevel == m) {
+                    $('.Delete-ticket-link').hide();
+                }
+            });
+            $(document).ready(function () {
+                if (uLevel == b) {
+                    $('.Delete-ticket-link').hide();
+                }
+            });
+        });
+
+</script>

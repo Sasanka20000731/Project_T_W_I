@@ -1,0 +1,89 @@
+﻿
+@model Printer_And_Ticket_Management_System.Models.Printer
+@{
+
+    Layout ="../Shared/_Layout.cshtml";
+
+}
+
+<h2>Insert Printer</h2>
+@using (Html.BeginForm("addPrinter", "Home"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4> </h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+
+            <label for="PrinterID" class="control-label col-md-2">Printer ID</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.PrinterID, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.PrinterID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="PrinterCode" class="control-label col-md-2">Printer Code</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PrinterCode, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.PrinterCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="BrandName" class="control-label col-md-2">Brand Name</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BrandName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.BrandName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="PurchasedDate" class="control-label col-md-2">Purchased Date</label>
+            <div class="col-md-10">
+                <input type="date" id="PurchasedDate" name="PurchasedDate" class="form-control" required="required">
+                @Html.ValidationMessageFor(model => model.PurchasedDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="VendorName" class="control-label col-md-2">Vendor Name</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VendorName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                @Html.ValidationMessageFor(model => model.VendorName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+
+            <label for="VendorContact" class="control-label col-md-2">Vendor Contact</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.VendorContact, new { @class = "form-control", pattern = "^0[0-9]{9}$", required = "required" })
+                @Html.ValidationMessageFor(model => model.VendorContact, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="WarrantyPeriod" class="control-label col-md-2">Warranty Period(Months)</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.WarrantyPeriod, new { @class = "form-control", type = "number", min = "1", step = "1", required = "required" })
+                @Html.ValidationMessageFor(model => model.WarrantyPeriod, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add Printer" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

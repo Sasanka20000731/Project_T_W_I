@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjectDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Table_Branch">
+    <Key>
+      <PropertyRef Name="BranchID" />
+    </Key>
+    <Property Name="BranchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BranchLocation" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Table_PrinterAllocation" Relationship="Self.FK_Table_PrinterAllocation_Table_Branch" FromRole="Table_Branch" ToRole="Table_PrinterAllocation" />
+    <NavigationProperty Name="Table_Ticket" Relationship="Self.FK_Table_Ticket_Table_Branch" FromRole="Table_Branch" ToRole="Table_Ticket" />
+    <NavigationProperty Name="Table_UserDetail" Relationship="Self.FK_Table_UserDetail_Table_UserDetail" FromRole="Table_Branch" ToRole="Table_UserDetail" />
+  </EntityType>
+  <EntityType Name="Table_Printer">
+    <Key>
+      <PropertyRef Name="PrinterID" />
+    </Key>
+    <Property Name="PrinterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PrinterCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PurchasedDate" Type="DateTime" Precision="0" />
+    <Property Name="VendorName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="VendorContact" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="WarrantyPeriod" Type="Int32" />
+    <NavigationProperty Name="Table_PrinterAllocation" Relationship="Self.FK_Table_PrinterAllocation_Table_PrinterAllocation" FromRole="Table_Printer" ToRole="Table_PrinterAllocation" />
+    <NavigationProperty Name="Table_Ticket" Relationship="Self.FK_Table_Ticket_Table_Printer" FromRole="Table_Printer" ToRole="Table_Ticket" />
+    <NavigationProperty Name="Table_PrinterAllocation1" Relationship="ProjectDBModel.FK_Table_PrinterAllocation_Table_Printer" FromRole="Table_Printer" ToRole="Table_PrinterAllocation" />
+  </EntityType>
+  <EntityType Name="Table_PrinterAllocation">
+    <Key>
+      <PropertyRef Name="AllocationID" />
+    </Key>
+    <Property Name="AllocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PrinterID" Type="Int32" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="AllocatedDate" Type="DateTime" Precision="0" />
+    <Property Name="Remark" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Table_Branch" Relationship="Self.FK_Table_PrinterAllocation_Table_Branch" FromRole="Table_PrinterAllocation" ToRole="Table_Branch" />
+    <NavigationProperty Name="Table_Printer" Relationship="Self.FK_Table_PrinterAllocation_Table_PrinterAllocation" FromRole="Table_PrinterAllocation" ToRole="Table_Printer" />
+    <NavigationProperty Name="Table_Printer1" Relationship="ProjectDBModel.FK_Table_PrinterAllocation_Table_Printer" FromRole="Table_PrinterAllocation" ToRole="Table_Printer" />
+  </EntityType>
+  <EntityType Name="Table_Ticket">
+    <Key>
+      <PropertyRef Name="TicketID" />
+    </Key>
+    <Property Name="TicketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TicketDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="PrinterID" Type="Int32" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="OpenedDate" Type="DateTime" Precision="0" />
+    <Property Name="ClosedDate" Type="DateTime" Precision="0" />
+    <Property Name="OpenedBy" Type="Int32" />
+    <NavigationProperty Name="Table_Branch" Relationship="Self.FK_Table_Ticket_Table_Branch" FromRole="Table_Ticket" ToRole="Table_Branch" />
+    <NavigationProperty Name="Table_Printer" Relationship="Self.FK_Table_Ticket_Table_Printer" FromRole="Table_Ticket" ToRole="Table_Printer" />
+    <NavigationProperty Name="Table_UserDetail" Relationship="Self.FK_Table_Ticket_Table_UserDetail" FromRole="Table_Ticket" ToRole="Table_UserDetail" />
+  </EntityType>
+  <EntityType Name="Table_UserDetail">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ContactNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="Passowrd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Table_Branch" Relationship="Self.FK_Table_UserDetail_Table_UserDetail" FromRole="Table_UserDetail" ToRole="Table_Branch" />
+    <NavigationProperty Name="Table_Ticket" Relationship="Self.FK_Table_Ticket_Table_UserDetail" FromRole="Table_UserDetail" ToRole="Table_Ticket" />
+  </EntityType>
+  <Association Name="FK_Table_PrinterAllocation_Table_Branch">
+    <End Role="Table_Branch" Type="Self.Table_Branch" Multiplicity="1" />
+    <End Role="Table_PrinterAllocation" Type="Self.Table_PrinterAllocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Branch">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Table_PrinterAllocation">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_Ticket_Table_Branch">
+    <End Role="Table_Branch" Type="Self.Table_Branch" Multiplicity="0..1" />
+    <End Role="Table_Ticket" Type="Self.Table_Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Branch">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Table_Ticket">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_UserDetail_Table_UserDetail">
+    <End Role="Table_Branch" Type="Self.Table_Branch" Multiplicity="0..1" />
+    <End Role="Table_UserDetail" Type="Self.Table_UserDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Branch">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Table_UserDetail">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_PrinterAllocation_Table_PrinterAllocation">
+    <End Role="Table_Printer" Type="Self.Table_Printer" Multiplicity="1" />
+    <End Role="Table_PrinterAllocation" Type="Self.Table_PrinterAllocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Printer">
+        <PropertyRef Name="PrinterID" />
+      </Principal>
+      <Dependent Role="Table_PrinterAllocation">
+        <PropertyRef Name="PrinterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_Ticket_Table_Printer">
+    <End Role="Table_Printer" Type="Self.Table_Printer" Multiplicity="0..1" />
+    <End Role="Table_Ticket" Type="Self.Table_Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Printer">
+        <PropertyRef Name="PrinterID" />
+      </Principal>
+      <Dependent Role="Table_Ticket">
+        <PropertyRef Name="PrinterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_Ticket_Table_UserDetail">
+    <End Role="Table_UserDetail" Type="Self.Table_UserDetail" Multiplicity="0..1" />
+    <End Role="Table_Ticket" Type="Self.Table_Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_UserDetail">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Table_Ticket">
+        <PropertyRef Name="OpenedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProjectDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Table_Branch" EntityType="Self.Table_Branch" />
+    <EntitySet Name="Table_Printer" EntityType="Self.Table_Printer" />
+    <EntitySet Name="Table_PrinterAllocation" EntityType="Self.Table_PrinterAllocation" />
+    <EntitySet Name="Table_Ticket" EntityType="Self.Table_Ticket" />
+    <EntitySet Name="Table_UserDetail" EntityType="Self.Table_UserDetail" />
+    <AssociationSet Name="FK_Table_PrinterAllocation_Table_Branch" Association="Self.FK_Table_PrinterAllocation_Table_Branch">
+      <End Role="Table_Branch" EntitySet="Table_Branch" />
+      <End Role="Table_PrinterAllocation" EntitySet="Table_PrinterAllocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_Ticket_Table_Branch" Association="Self.FK_Table_Ticket_Table_Branch">
+      <End Role="Table_Branch" EntitySet="Table_Branch" />
+      <End Role="Table_Ticket" EntitySet="Table_Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_UserDetail_Table_UserDetail" Association="Self.FK_Table_UserDetail_Table_UserDetail">
+      <End Role="Table_Branch" EntitySet="Table_Branch" />
+      <End Role="Table_UserDetail" EntitySet="Table_UserDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_PrinterAllocation_Table_PrinterAllocation" Association="Self.FK_Table_PrinterAllocation_Table_PrinterAllocation">
+      <End Role="Table_Printer" EntitySet="Table_Printer" />
+      <End Role="Table_PrinterAllocation" EntitySet="Table_PrinterAllocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_Ticket_Table_Printer" Association="Self.FK_Table_Ticket_Table_Printer">
+      <End Role="Table_Printer" EntitySet="Table_Printer" />
+      <End Role="Table_Ticket" EntitySet="Table_Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_Ticket_Table_UserDetail" Association="Self.FK_Table_Ticket_Table_UserDetail">
+      <End Role="Table_UserDetail" EntitySet="Table_UserDetail" />
+      <End Role="Table_Ticket" EntitySet="Table_Ticket" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ProjectDBModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ProjectDBModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="Table_AuditTrail" EntityType="ProjectDBModel.Table_AuditTrail" />
+    <AssociationSet Name="FK_Table_PrinterAllocation_Table_Printer" Association="ProjectDBModel.FK_Table_PrinterAllocation_Table_Printer">
+      <End Role="Table_Printer" EntitySet="Table_Printer" />
+      <End Role="Table_PrinterAllocation" EntitySet="Table_PrinterAllocation" />
+    </AssociationSet>
+    <FunctionImport Name="InsertDataToTableAuditTrail">
+      <Parameter Name="FunctioonCase" Mode="In" Type="String" />
+      <Parameter Name="ReasonCase" Mode="In" Type="String" />
+      <Parameter Name="ActDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="Table_AuditTrail">
+    <Key>
+      <PropertyRef Name="AudiTrailID" />
+    </Key>
+    <Property Name="AudiTrailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Function_case" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Reason" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+  </EntityType>
+  <Association Name="FK_Table_PrinterAllocation_Table_Printer">
+    <End Type="ProjectDBModel.Table_Printer" Role="Table_Printer" Multiplicity="1" />
+    <End Type="ProjectDBModel.Table_PrinterAllocation" Role="Table_PrinterAllocation" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Printer">
+        <PropertyRef Name="PrinterID" />
+      </Principal>
+      <Dependent Role="Table_PrinterAllocation">
+        <PropertyRef Name="AllocationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

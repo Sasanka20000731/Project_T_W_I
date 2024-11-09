@@ -1,0 +1,171 @@
+﻿@model Printer_And_Ticket_Management_System.Models.User
+
+@{
+    ViewBag.Title = "ViewProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>Profile</h2>
+
+    <div>
+
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactNumber)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateOfBirth)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BranchID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BranchID)
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.EmpID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EmpID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserRole)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserRole)
+            </dd>
+
+
+
+        </dl>
+    </div>*@
+<style>
+    .profile-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+        position: relative;
+    }
+
+        .profile-container h2 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .profile-container hr {
+            border: none;
+            border-top: 1px solid #ccc;
+            margin: 10px 0;
+        }
+
+        .profile-container table {
+            width: 100%;
+        }
+
+        .profile-container th,
+        .profile-container td {
+            padding: 8px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .profile-container th {
+            text-align: left;
+            font-weight: bold;
+        }
+
+    .profile-icon {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 24px;
+        color: #333;
+    }
+</style>
+
+
+
+
+<div class="profile-container" >
+    <h2>Profile</h2>
+    <i class="fa fa-user profile-icon"></i>
+    <hr />
+    <table>
+        <tr>
+            <th>First Name</th>
+            <td>@Html.DisplayFor(model => model.FirstName)</td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td>@Html.DisplayFor(model => model.LastName)</td>
+        </tr>
+        <tr>
+            <th>Contact Number</th>
+            <td>@Html.DisplayFor(model => model.ContactNumber)</td>
+        </tr>
+        <tr>
+            <th>Date of Birth</th>
+            <td>@Html.DisplayFor(model => model.DateOfBirth)</td>
+        </tr>
+        <tr>
+            <th>Branch ID</th>
+            <td>@Html.DisplayFor(model => model.BranchID)</td>
+        </tr>
+        <tr>
+            <th>Employee ID</th>
+            <td>@Html.DisplayFor(model => model.EmpID)</td>
+        </tr>
+        <tr>
+            <th></th>
+            <td class="text-right"> @Html.ActionLink("Change Password", "ChangePassword", new { id = Model.UserID })
+            </td>
+        </tr>
+    </table>
+</div>
+
+@*<p>
+    @Html.ActionLink("Change Password", "ChangePassword", new { id = Model.UserID }) 
+
+</p>
+
+<p>
+ 
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

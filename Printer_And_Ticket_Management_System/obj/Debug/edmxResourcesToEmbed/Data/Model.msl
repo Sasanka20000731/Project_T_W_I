@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProjectDBModelStoreContainer" CdmEntityContainer="ProjectDBEntities">
+    <EntitySetMapping Name="Table_AuditTrail">
+      <EntityTypeMapping TypeName="ProjectDBModel.Table_AuditTrail">
+        <MappingFragment StoreEntitySet="Table_AuditTrail">
+          <ScalarProperty Name="AuditTrailID" ColumnName="AuditTrailID" />
+          <ScalarProperty Name="Function_case" ColumnName="Function_case" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_Branch">
+      <EntityTypeMapping TypeName="ProjectDBModel.Table_Branch">
+        <MappingFragment StoreEntitySet="Table_Branch">
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="BranchLocation" ColumnName="BranchLocation" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_Printer">
+      <EntityTypeMapping TypeName="ProjectDBModel.Table_Printer">
+        <MappingFragment StoreEntitySet="Table_Printer">
+          <ScalarProperty Name="PrinterID" ColumnName="PrinterID" />
+          <ScalarProperty Name="PrinterCode" ColumnName="PrinterCode" />
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+          <ScalarProperty Name="PurchasedDate" ColumnName="PurchasedDate" />
+          <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+          <ScalarProperty Name="VendorContact" ColumnName="VendorContact" />
+          <ScalarProperty Name="WarrantyPeriod" ColumnName="WarrantyPeriod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_PrinterAllocation">
+      <EntityTypeMapping TypeName="ProjectDBModel.Table_PrinterAllocation">
+        <MappingFragment StoreEntitySet="Table_PrinterAllocation">
+          <ScalarProperty Name="AllocationID" ColumnName="AllocationID" />
+          <ScalarProperty Name="PrinterID" ColumnName="PrinterID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="AllocatedDate" ColumnName="AllocatedDate" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_Ticket">
+      <EntityTypeMapping TypeName="ProjectDBModel.Table_Ticket">
+        <MappingFragment StoreEntitySet="Table_Ticket">
+          <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+          <ScalarProperty Name="TicketDescription" ColumnName="TicketDescription" />
+          <ScalarProperty Name="PrinterID" ColumnName="PrinterID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="OpenedDate" ColumnName="OpenedDate" />
+          <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
+          <ScalarProperty Name="OpenedBy" ColumnName="OpenedBy" />
+          <ScalarProperty Name="States" ColumnName="States" />
+          <ScalarProperty Name="urgency" ColumnName="urgency" />
+          <ScalarProperty Name="ClosedBy" ColumnName="ClosedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Table_UserDetail">
+      <EntityTypeMapping TypeName="ProjectDBModel.Table_UserDetail">
+        <MappingFragment StoreEntitySet="Table_UserDetail">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="Passowrd" ColumnName="Passowrd" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ProjectDBModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ProjectDBModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ProjectDBModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="SP_GenerateAllocationListReport" FunctionName="ProjectDBModel.Store.SP_GenerateAllocationListReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectDBModel.SP_GenerateAllocationListReport_Result">
+          <ScalarProperty Name="AllocationID" ColumnName="AllocationID" />
+          <ScalarProperty Name="PrinterID" ColumnName="PrinterID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="AllocatedDate" ColumnName="AllocatedDate" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GenerateAuditTrailRpt" FunctionName="ProjectDBModel.Store.SP_GenerateAuditTrailRpt">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectDBModel.SP_GenerateAuditTrailRpt_Result">
+          <ScalarProperty Name="AuditTrailID" ColumnName="AuditTrailID" />
+          <ScalarProperty Name="Function_case" ColumnName="Function_case" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GenerateBranchListReport" FunctionName="ProjectDBModel.Store.SP_GenerateBranchListReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectDBModel.SP_GenerateBranchListReport_Result">
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="BranchLocation" ColumnName="BranchLocation" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GeneratePrinterListReport" FunctionName="ProjectDBModel.Store.SP_GeneratePrinterListReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectDBModel.SP_GeneratePrinterListReport_Result">
+          <ScalarProperty Name="PrinterID" ColumnName="PrinterID" />
+          <ScalarProperty Name="PrinterCode" ColumnName="PrinterCode" />
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+          <ScalarProperty Name="PurchasedDate" ColumnName="PurchasedDate" />
+          <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+          <ScalarProperty Name="VendorContact" ColumnName="VendorContact" />
+          <ScalarProperty Name="WarrantyPeriod" ColumnName="WarrantyPeriod" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GenerateTicketsReport" FunctionName="ProjectDBModel.Store.SP_GenerateTicketsReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectDBModel.SP_GenerateTicketsReport_Result">
+          <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+          <ScalarProperty Name="TicketDescription" ColumnName="TicketDescription" />
+          <ScalarProperty Name="PrinterID" ColumnName="PrinterID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="OpenedDate" ColumnName="OpenedDate" />
+          <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
+          <ScalarProperty Name="OpenedBy" ColumnName="OpenedBy" />
+          <ScalarProperty Name="States" ColumnName="States" />
+          <ScalarProperty Name="urgency" ColumnName="urgency" />
+          <ScalarProperty Name="ClosedBy" ColumnName="ClosedBy" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GenerateUserManagementReport" FunctionName="ProjectDBModel.Store.SP_GenerateUserManagementReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectDBModel.SP_GenerateUserManagementReport_Result">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="Passowrd" ColumnName="Passowrd" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ProjectDBModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectDBModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ProjectDBModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ProjectDBModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_InsertDataToTableAuditTrail" FunctionName="ProjectDBModel.Store.SP_InsertDataToTableAuditTrail" />
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ProjectDBModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ProjectDBModel.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjectDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Table_AuditTrail">
+    <Key>
+      <PropertyRef Name="AuditTrailID" />
+    </Key>
+    <Property Name="AuditTrailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Function_case" Type="varchar" MaxLength="50" />
+    <Property Name="Reason" Type="varchar" MaxLength="500" />
+    <Property Name="Date" Type="date" />
+  </EntityType>
+  <EntityType Name="Table_Branch">
+    <Key>
+      <PropertyRef Name="BranchID" />
+    </Key>
+    <Property Name="BranchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchName" Type="varchar" MaxLength="50" />
+    <Property Name="BranchLocation" Type="varchar" MaxLength="70" />
+    <Property Name="CreatedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="Table_Printer">
+    <Key>
+      <PropertyRef Name="PrinterID" />
+    </Key>
+    <Property Name="PrinterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PrinterCode" Type="varchar" MaxLength="50" />
+    <Property Name="BrandName" Type="varchar" MaxLength="50" />
+    <Property Name="PurchasedDate" Type="date" />
+    <Property Name="VendorName" Type="varchar" MaxLength="30" />
+    <Property Name="VendorContact" Type="nchar" MaxLength="10" />
+    <Property Name="WarrantyPeriod" Type="int" />
+  </EntityType>
+  <EntityType Name="Table_PrinterAllocation">
+    <Key>
+      <PropertyRef Name="AllocationID" />
+    </Key>
+    <Property Name="AllocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PrinterID" Type="int" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="AllocatedDate" Type="date" />
+    <Property Name="Remark" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Table_Ticket">
+    <Key>
+      <PropertyRef Name="TicketID" />
+    </Key>
+    <Property Name="TicketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TicketDescription" Type="varchar" MaxLength="100" />
+    <Property Name="PrinterID" Type="int" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="OpenedDate" Type="datetime" />
+    <Property Name="ClosedDate" Type="datetime" />
+    <Property Name="OpenedBy" Type="int" />
+    <Property Name="States" Type="varchar" MaxLength="10" />
+    <Property Name="urgency" Type="varchar" MaxLength="30" />
+    <Property Name="ClosedBy" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Table_UserDetail">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="20" />
+    <Property Name="LastName" Type="varchar" MaxLength="20" />
+    <Property Name="ContactNumber" Type="nchar" MaxLength="10" />
+    <Property Name="DateOfBirth" Type="date" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="Passowrd" Type="varchar" MaxLength="20" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="UserRole" Type="varchar" MaxLength="30" />
+    <Property Name="EmpID" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <Association Name="FK_Table_PrinterAllocation_Table_Branch">
+    <End Role="Table_Branch" Type="Self.Table_Branch" Multiplicity="0..1" />
+    <End Role="Table_PrinterAllocation" Type="Self.Table_PrinterAllocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Branch">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Table_PrinterAllocation">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_PrinterAllocation_Table_Printer">
+    <End Role="Table_Printer" Type="Self.Table_Printer" Multiplicity="0..1" />
+    <End Role="Table_PrinterAllocation" Type="Self.Table_PrinterAllocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Printer">
+        <PropertyRef Name="PrinterID" />
+      </Principal>
+      <Dependent Role="Table_PrinterAllocation">
+        <PropertyRef Name="PrinterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_Ticket_Table_Branch">
+    <End Role="Table_Branch" Type="Self.Table_Branch" Multiplicity="0..1" />
+    <End Role="Table_Ticket" Type="Self.Table_Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Branch">
+        <PropertyRef Name="BranchID" />
+      </Principal>
+      <Dependent Role="Table_Ticket">
+        <PropertyRef Name="BranchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_Ticket_Table_Printer">
+    <End Role="Table_Printer" Type="Self.Table_Printer" Multiplicity="0..1" />
+    <End Role="Table_Ticket" Type="Self.Table_Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_Printer">
+        <PropertyRef Name="PrinterID" />
+      </Principal>
+      <Dependent Role="Table_Ticket">
+        <PropertyRef Name="PrinterID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_Ticket_Table_UserDetail">
+    <End Role="Table_UserDetail" Type="Self.Table_UserDetail" Multiplicity="0..1" />
+    <End Role="Table_Ticket" Type="Self.Table_Ticket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Table_UserDetail">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Table_Ticket">
+        <PropertyRef Name="OpenedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_GenerateAllocationListReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_FromDate" Type="date" Mode="In" />
+    <Parameter Name="p_ToDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="SP_GenerateAuditTrailRpt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_ReportType" Type="int" Mode="In" />
+    <Parameter Name="p_FromDate" Type="date" Mode="In" />
+    <Parameter Name="p_ToDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="SP_GenerateBranchListReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_FromDate" Type="date" Mode="In" />
+    <Parameter Name="p_ToDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="SP_GeneratePrinterListReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_FromDate" Type="date" Mode="In" />
+    <Parameter Name="p_ToDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="SP_GenerateTicketsReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_FromDate" Type="date" Mode="In" />
+    <Parameter Name="p_ToDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="SP_GenerateUserManagementReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="p_FromDate" Type="date" Mode="In" />
+    <Parameter Name="p_ToDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_InsertDataToTableAuditTrail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FunctioonCase" Type="varchar" Mode="In" />
+    <Parameter Name="ReasonCase" Type="varchar" Mode="In" />
+    <Parameter Name="ActDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="ProjectDBModelStoreContainer">
+    <EntitySet Name="Table_AuditTrail" EntityType="Self.Table_AuditTrail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_Branch" EntityType="Self.Table_Branch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_Printer" EntityType="Self.Table_Printer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_PrinterAllocation" EntityType="Self.Table_PrinterAllocation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_Ticket" EntityType="Self.Table_Ticket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_UserDetail" EntityType="Self.Table_UserDetail" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Table_PrinterAllocation_Table_Branch" Association="Self.FK_Table_PrinterAllocation_Table_Branch">
+      <End Role="Table_Branch" EntitySet="Table_Branch" />
+      <End Role="Table_PrinterAllocation" EntitySet="Table_PrinterAllocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_PrinterAllocation_Table_Printer" Association="Self.FK_Table_PrinterAllocation_Table_Printer">
+      <End Role="Table_Printer" EntitySet="Table_Printer" />
+      <End Role="Table_PrinterAllocation" EntitySet="Table_PrinterAllocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_Ticket_Table_Branch" Association="Self.FK_Table_Ticket_Table_Branch">
+      <End Role="Table_Branch" EntitySet="Table_Branch" />
+      <End Role="Table_Ticket" EntitySet="Table_Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_Ticket_Table_Printer" Association="Self.FK_Table_Ticket_Table_Printer">
+      <End Role="Table_Printer" EntitySet="Table_Printer" />
+      <End Role="Table_Ticket" EntitySet="Table_Ticket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_Ticket_Table_UserDetail" Association="Self.FK_Table_Ticket_Table_UserDetail">
+      <End Role="Table_UserDetail" EntitySet="Table_UserDetail" />
+      <End Role="Table_Ticket" EntitySet="Table_Ticket" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
